@@ -5,6 +5,6 @@ const authrouter = express.Router();
 
 
 authrouter.post("/google", googleAuth);
-authrouter.post("/logout", logout);
+authrouter.get("/logout", logout);
 
 export default authrouter;

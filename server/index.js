@@ -5,6 +5,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/connectdb.js';
 import authrouter from './Routes/auth.Route.js';
+import UserRouter from './Routes/user.Routes.js';
+import cookieParser from 'cookie-parser';
 
 
 
@@ -15,6 +17,7 @@ app.use(cors({
     credentials: true,
 }))
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
 
 
@@ -23,7 +26,8 @@ app.get("/", (req,res) => {
     res.json({message: "Hello World!"});
 })
 
-app.use('/auth/api', authrouter);
+app.use('/api/auth', authrouter);
+app.use('/api/user', UserRouter);
 
 
 
