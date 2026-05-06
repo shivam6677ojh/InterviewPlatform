@@ -1,16 +1,77 @@
-# React + Vite
+# AI Interview Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live Website: https://interviewplatform-1.onrender.com/
 
-Currently, two official plugins are available:
+AI Interview Platform is a full-stack web application that helps users practice interviews with role-based AI questions, voice interaction, instant feedback, and performance analytics.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Role and experience-based interview generation
+- Resume upload (PDF) and resume-aware question flow
+- Voice-enabled interview experience (AI speaks, user answers)
+- AI scoring on confidence, communication, and correctness
+- Interview history with detailed report view
+- Downloadable PDF interview report
+- Credit-based usage model with Razorpay payment integration
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+Frontend:
+- React + Vite
+- Tailwind CSS
+- Redux Toolkit
+- Motion
+- Recharts
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Backend:
+- Node.js + Express
+- MongoDB + Mongoose
+- JWT auth with cookies
+- Multer + PDF parsing
+- Razorpay integration
+
+## Project Structure
+
+- `client/` React frontend
+- `server/` Express backend API
+
+## Run Locally
+
+### 1. Clone and install dependencies
+
+```bash
+git clone <your-repo-url>
+cd Ai-Interview-Platform
+
+cd client
+npm install
+
+cd ../server
+npm install
+```
+
+### 2. Configure environment variables
+
+Create `.env` files for both `client` and `server` with required keys (Firebase, API base URL, JWT secret, Mongo URI, Razorpay keys, and AI provider keys).
+
+### 3. Start development servers
+
+Backend:
+
+```bash
+cd server
+npm run dev
+```
+
+Frontend:
+
+```bash
+cd client
+npm run dev
+```
+
+## Outcome
+
+- Automates interview practice with AI-driven question generation and evaluation
+- Gives users measurable feedback and progress tracking over multiple sessions
+- Simulates real interview pressure with timer-based and voice-based interaction
