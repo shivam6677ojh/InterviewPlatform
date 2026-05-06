@@ -39,6 +39,7 @@ const Step2Interview = ({ interviewData, onFinish }) => {
 
 
     const isMicRunningRef = useRef(false);
+    const shouldRestartMicRef = useRef(false);
 
     const startMic = () => {
         const recognition = recognitionRef.current;
@@ -54,6 +55,7 @@ const Step2Interview = ({ interviewData, onFinish }) => {
 
     const stopMic = () => {
         if (recognitionRef.current) {
+            shouldRestartMicRef.current = false;
             recognitionRef.current.stop();
         }
     };
@@ -132,6 +134,7 @@ const Step2Interview = ({ interviewData, onFinish }) => {
 
             utterance.onstart = () => {
                 setIsAIPlaying(true);
+                shouldRestartMicRef.current = true;
                 stopMic();
                 videoRef.current?.play();
             }
@@ -141,13 +144,10 @@ const Step2Interview = ({ interviewData, onFinish }) => {
                 videoRef.current.currentTime = 0;
                 setIsAIPlaying(false);
 
-
-
-                if (isMicOn) {
-                    startMic();
-                }
-
                 setTimeout(() => {
+                    if (isMicOn && shouldRestartMicRef.current) {
+                        startMic();
+                    }
                     setSubtitle("");
                     resolve();
                 }, 300);
@@ -252,6 +252,12 @@ const Step2Interview = ({ interviewData, onFinish }) => {
 
         recognition.onend = () => {
             isMicRunningRef.current = false;
+
+            if (isMicOn && !isAIPlaying && shouldRestartMicRef.current) {
+                setTimeout(() => {
+                    startMic();
+                }, 250);
+            }
         };
 
         recognitionRef.current = recognition;
