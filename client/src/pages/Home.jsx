@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar'
 import { useSelector } from 'react-redux';
 
 import { motion } from "motion/react";
+
 import {
     BsRobot,
     BsMic,
@@ -100,7 +101,7 @@ const Home = () => {
                                         return;
                                     }
 
-                                    navigate("/histroy");
+                                    navigate("/history");
                                 }}
 
                                 whileHover={{ opacity: 0.9, scale: 1.03 }}

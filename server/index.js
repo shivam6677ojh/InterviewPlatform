@@ -7,6 +7,8 @@ import connectDB from './config/connectdb.js';
 import authrouter from './Routes/auth.Route.js';
 import UserRouter from './Routes/user.Routes.js';
 import cookieParser from 'cookie-parser';
+import interviewRouter from './Routes/interview.Routes.js';
+import PaymentRouter from './Routes/payment.Routes.js';
 
 
 
@@ -28,7 +30,8 @@ app.get("/", (req,res) => {
 
 app.use('/api/auth', authrouter);
 app.use('/api/user', UserRouter);
-
+app.use("/api/interview", interviewRouter);
+app.use("/api/payment", PaymentRouter);
 
 
 app.listen(process.env.PORT,() => {
