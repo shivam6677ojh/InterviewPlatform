@@ -11,7 +11,9 @@ import InterviewHistory from './pages/InterviewHistory.jsx'
 import InterviewReport from './pages/InterviewReport.jsx'
 import Pricing from './pages/Pricing.jsx'
 
-export const serverURL = "https://interviewplatform-vc6f.onrender.com"
+export const serverURL = window.location.hostname === "localhost"
+  ? "http://localhost:8000"
+  : "https://interviewplatform-vc6f.onrender.com";
 
 const App = () => {
 

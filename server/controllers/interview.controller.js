@@ -77,7 +77,7 @@ Return ONLY raw JSON (no markdown, no backticks):
             fs.unlinkSync(req.file.path);
         }
 
-        return res.status(500).json({ error: "Internal server error" });
+        return res.status(500).json({ error: error.message || "Internal server error" });
     }
 };
 
@@ -236,7 +236,7 @@ Make questions based on the candidate’s role, experience,interviewMode, projec
         console.error("Error generating questions:", error);
         return res.status(500).json({
             success: false,
-            message: "Internal server error generating questions",
+            message: error.message || "Internal server error generating questions",
         })
     }
 };
