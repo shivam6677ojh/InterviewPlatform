@@ -240,10 +240,6 @@ const Step3Report = ({ report }) => {
                 >
                     Download PDF
                 </button>
-
-
-
-
             </div>
 
 

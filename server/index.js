@@ -9,18 +9,32 @@ import UserRouter from './Routes/user.Routes.js';
 import cookieParser from 'cookie-parser';
 import interviewRouter from './Routes/interview.Routes.js';
 import PaymentRouter from './Routes/payment.Routes.js';
-
-
+import { apiLimiter } from './middlewares/rateLimiter.js';
 
 dotenv.config();
 
+app.set('trust proxy', 1);
+
+const allowedOrigins = [
+    "https://interviewplatform-1.onrender.com",
+    "http://localhost:5173"
+];
+
 app.use(cors({
-    origin: "https://interviewplatform-1.onrender.com",
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
 }))
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
+app.use('/api', apiLimiter);
 
 
 
