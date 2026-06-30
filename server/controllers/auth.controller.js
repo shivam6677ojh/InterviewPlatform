@@ -20,10 +20,11 @@ export const  googleAuth = async (req, res) => {
 
         let token = await genToken(user._id);
 
+        const isLocal = req.headers.host?.includes("localhost");
         res.cookie("token", token , {
             httpOnly: true,
-            secure: true,
-            sameSite: "none",
+            secure: !isLocal,
+            sameSite: isLocal ? "lax" : "none",
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
 
@@ -44,7 +45,12 @@ export const logout = async (req, res) => {
 
     try {
 
-        res.clearCookie("token");
+        const isLocal = req.headers.host?.includes("localhost");
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: !isLocal,
+            sameSite: isLocal ? "lax" : "none",
+        });
 
         return res.status(200).json({
             success: true,
